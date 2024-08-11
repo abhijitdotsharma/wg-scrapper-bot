@@ -1,4 +1,4 @@
-import { Bot } from "grammy";
+import { Bot, webhookCallback } from "grammy";
 import fetch from "node-fetch";
 import "dotenv/config";
 
@@ -14,7 +14,7 @@ if(!process.env.BOT_TOKEN) {
 
 export const bot = new Bot(process.env.BOT_TOKEN);
 
-
+export default webhookCallback(bot, "std/http");
 
 bot.on("message", (ctx) => ctx.reply("Got message!"));
 
