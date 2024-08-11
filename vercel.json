@@ -1,5 +1,8 @@
 {
-  "outputDirectory": ".",
-  "installCommand": "npm i --omit=dev",
-  "buildCommand": "npx ts-node scripts/build.ts"
+  "functions": {
+    "api/bot.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
 }
