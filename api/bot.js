@@ -5,6 +5,8 @@ if (!token) throw new Error("BOT_TOKEN is unset");
 
 const bot = new Bot(token);
 
+console.log('runnning')
+
 bot.command("start", ctx => ctx.reply("Hello! I am a bot!"));
 
 export default webhookCallback(bot, "std/http");
