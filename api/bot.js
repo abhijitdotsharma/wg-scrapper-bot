@@ -1,12 +1,27 @@
-import { Bot, webhookCallback } from "grammy";
+import 'dotenv/config';
+import { Bot, webhookCallback } from 'grammy';
+import express from 'express';
 
-const token = process.env.BOT_TOKEN;
-if (!token) throw new Error("BOT_TOKEN is unset");
+const bot = new Bot(process.env.BOT_TOKEN);
 
-const bot = new Bot(token);
+bot.command('start', (ctx) => {
+ console.log('Received /start command');
+ ctx.reply(`Welcome ${ctx.from?.first_name}`);
+});
 
-console.log('runnning')
+bot.command('help', (ctx) => {
+ console.log('Received /help command');
+ ctx.reply('Send /start to start the bot.');
+});
 
-bot.command("start", ctx => ctx.reply("Hello! I am a bot!"));
+const app = express();
+app.use(express.json());
 
-export default webhookCallback(bot, "std/http");
+// Set up the webhook
+app.use(webhookCallback(bot, 'express'));
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, async () => {
+ console.log(`Server is running on port ${PORT}`);
+});
