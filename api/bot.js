@@ -2,7 +2,11 @@ import 'dotenv/config';
 import { Bot, webhookCallback } from 'grammy';
 import express from 'express';
 
-import { COMMANDS } from '../util/constants';
+const COMMANDS = {
+    START: 'start',
+    HELP: 'help',
+    GET_LISTINGS: 'getlistings'
+};
 
 if(!process.env.BOT_TOKEN || !process.env.SCRAPPER_SERVER_URL) {
     throw new Error(`Please provide BOT_TOKEN and SCRAPPER_SERVER_URL in the .env file`);
