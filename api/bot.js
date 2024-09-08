@@ -58,6 +58,11 @@ bot.command(COMMANDS.TEMP, (ctx) => {
 bot.command(COMMANDS.GET_LISTINGS, async (ctx) => {
     try {
         const response = await fetch(GET_LISTINGS_URL); // hits the express scrapper endpoint currently running on localhost / render
+        
+        if(response.status === 404) {
+          throw new Error(`Oops: ${response.status.json}`);
+        }
+        
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
